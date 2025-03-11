@@ -15,7 +15,7 @@ app = Flask(__name__)
 def pagina():
     return 'hola soy Laura :)'
 
-app.run(port=8080)
+app.run(port=8080, debug=True)
 
 #El metodo run le va a indicar a nuestro servidor que va a comenzar a recibir peticiones (servir)
 
