@@ -1,13 +1,14 @@
-#Proyecto de una API (programacion avanzada)
+# Proyecto de una API (programacion avanzada)
 
 Este es un proyecto donde estaremos realizando una API con python y algunos componentes de HTML.
 
 #### Lenguajes utilizados
--Python 
--HTML
--Markdown
--CSS
--JavaScript
+
+- Python 
+- HTML
+- Markdown
+- CSS
+- JavaScript
 
 Para ejecutar este repositorio tenemos que ejecutar todas las librerias que se encuentran en el archivo **requirments**.
 
