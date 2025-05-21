@@ -43,3 +43,12 @@ def iniciar_sesion(correo, password):
     # Si la contraseña del formulario es de la db
     if usuarios_existentes.verificar_password(password_plano = password):
         pass
+
+def encontrar_todos_los_usuarios():
+
+    # Creamos una variable que contendra la respuesta de nuestra db
+    usuarios = Usuario.query.all()
+
+    print(usuarios)
+
+    return usuarios
