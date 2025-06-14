@@ -1,2 +1,3 @@
 api_entorno/
-_pycache_/
+echo "__pycache__/" > .gitignore
+

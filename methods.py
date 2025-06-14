@@ -32,6 +32,7 @@ def iniciar_sesion(correo, password):
 
     # Que contenga usuarios filtrados a traveés de un parametro
     usuarios_existentes = Usuario.query.filter_by(email=correo).first()
+    
 
     # 1.- Si el usuario existe. enntonces puede iniciar sesión
 

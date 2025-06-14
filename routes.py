@@ -49,7 +49,6 @@ def cargar_rutas(app):
         respuesta_login = iniciar_sesion(email, password)
 
 
-
         if respuesta_login['status'] == 'error':
             return redirect(url_for('login', status=respuesta_login['status']))
         

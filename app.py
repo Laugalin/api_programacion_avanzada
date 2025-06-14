@@ -3,7 +3,6 @@
 
 from flask import Flask
 
-
 # Desde el archivo routes quiero que importe la funcion "Cargar_rutas"
 from routes import cargar_rutas
 

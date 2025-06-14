@@ -10,3 +10,4 @@ db =SQLAlchemy()
 
 # Creeamos un objeto de una clase
 jwt = JWTManager()
+
