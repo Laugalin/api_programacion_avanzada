@@ -1,4 +1,6 @@
 from models import Usuario
+from extensions import jwt
+from flask_jwt_extended import create_access_token
 
 # Un archivo que contiene todas las acciones
 # que un usuario puede realizar
@@ -38,11 +40,21 @@ def iniciar_sesion(correo, password):
     # Si el usuario no existe en la db no puede iniciar sesión
     if usuarios_existentes is None:
         print('La cuenta no existe')
-        return{'status': 'error', 'error':'La cuenta no existe'}
+        return {'status': 'error', 'error':'La cuenta no existe'}
     
     # Si la contraseña del formulario es de la db
     if usuarios_existentes.verificar_password(password_plano = password):
-        pass
+        print('Inicio de sesión exitoso :D')
+        token_de_acceso = create_access_token(identity=usuarios_existentes.name)
+        print(token_de_acceso)
+        return {'status' : 'ok', 'token' : token_de_acceso}
+    
+    
+        
+    # Si el usuario existe pero la contraseña no coincide
+    else:
+        print('La contraseña es incorrecta')
+        return {'status':'error','error':'Contraseña incorrecta :( '}
 
 def encontrar_todos_los_usuarios():
 

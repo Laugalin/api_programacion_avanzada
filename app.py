@@ -7,7 +7,7 @@ from flask import Flask
 # Desde el archivo routes quiero que importe la funcion "Cargar_rutas"
 from routes import cargar_rutas
 
-from extensions import db
+from extensions import db, jwt
 
 #flask: Libreria
 #Flask: modulo (clase)
@@ -23,7 +23,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres.ibgojbihyyldlfgou
 
 app.config['SQLACHEMY_TRACK_MODIFICATIONS'] = False
 
+# 3.- Agregamos una llave o una firma para nuestros tokens
+# 0Bjk5fTiU6VtsbLILf9HFX6UMc2R5b
+app.config['JWT_SECRET_KEY'] = '0Bjk5fTiU6VtsbLILf9HFX6UMc2R5b'
+
 db.init_app(app)
+
+
+# Establecemos "conexión" entre jwt y la apilicación
+jwt.init_app(app)
 
 # Cargamos las rutas creadas desde el archivo routes.py
 

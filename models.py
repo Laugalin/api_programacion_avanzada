@@ -30,8 +30,8 @@ class Usuario(db.Model):
     self.password = generate_password_hash (password_original)
 
 
-  def verificar_password(self,passwor_plano):
-    return check_password_hash(self.password,passwor_plano)
+  def verificar_password(self,password_plano):
+    return check_password_hash(self.password,password_plano)
 
 
   def save(self):
