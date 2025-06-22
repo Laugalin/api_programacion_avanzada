@@ -4,6 +4,12 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 
 from methods import crear_cuenta, iniciar_sesion, encontrar_todos_los_usuarios
 
+from extensions import jwt
+
+from flask_jwt_extended import decode_token
+
+firma = '0Bjk5fTiU6VtsbLILf9HFX6UMc2R5b'
+
 def cargar_rutas(app):
 
 #Este bloque de codigo es la base para todas las rutas 
@@ -49,6 +55,7 @@ def cargar_rutas(app):
         respuesta_login = iniciar_sesion(email, password)
 
 
+
         if respuesta_login['status'] == 'error':
             return redirect(url_for('login', status=respuesta_login['status']))
         
@@ -83,8 +90,6 @@ def cargar_rutas(app):
         
         return redirect(url_for('index', status=respuesta_signup ['status']))
 
-    
-
 
 
     
@@ -93,6 +98,27 @@ def cargar_rutas(app):
         return render_template('error.html')
 
 
+    @app.route('/usuario')
+    def pantalla_usuario():
+        token = request.cookies.get('access_token')
 
+# Si existe un token intentamos decodificar la información
+        if token:
+
+            try:
+
+                informacion_token = decode_token(token)
+
+                print(informacion_token)
+                # Lo redireccionamos a la pagina del usuario
+                return render_template('user.html', nombre=informacion_token['sub'])
+            # Si el token viene dañado o es incorrecto
+            except:
+                # Redigiremos al usuario al login
+                print('El token viene incorrecto')
+                return redirect(url_for('login'))
+
+        else:
+            return redirect(url_for('login'))
 
                                                                        

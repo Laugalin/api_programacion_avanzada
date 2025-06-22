@@ -2,6 +2,12 @@ from models import Usuario
 from extensions import jwt
 from flask_jwt_extended import create_access_token
 
+
+# La libreria DTETIME le permite a python trabajar con fechas y horas
+
+#Time delta nos ayuda a hacer la conversion de dias, horas, minutos, etc. aun formato Linux
+from datetime import timedelta
+
 # Un archivo que contiene todas las acciones
 # que un usuario puede realizar
 
@@ -32,9 +38,11 @@ def iniciar_sesion(correo, password):
 
     # Que contenga usuarios filtrados a traveés de un parametro
     usuarios_existentes = Usuario.query.filter_by(email=correo).first()
-    
+
+
 
     # 1.- Si el usuario existe. enntonces puede iniciar sesión
+    
 
     # 2.- Si el usuario no existe en la db no puede iniciar sesión
 
@@ -45,8 +53,14 @@ def iniciar_sesion(correo, password):
     
     # Si la contraseña del formulario es de la db
     if usuarios_existentes.verificar_password(password_plano = password):
+        
+        # La variable indicara cuando caduca el token
+        caducidad = timedelta(minutes=3)
+    
+
+        
         print('Inicio de sesión exitoso :D')
-        token_de_acceso = create_access_token(identity=usuarios_existentes.name)
+        token_de_acceso = create_access_token(identity=usuarios_existentes.name, expires_delta=caducidad)
         print(token_de_acceso)
         return {'status' : 'ok', 'token' : token_de_acceso}
     
