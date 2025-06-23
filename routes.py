@@ -82,7 +82,7 @@ def cargar_rutas(app):
         return respuesta
 
     #intersectamos la informacion del Sign Up del usuario
-    @app.route('/datos_crear_cuenta', methods=['post'])
+    @app.route('/datos_crear_cuenta', methods=['POST'])
     def obtener_datos_cuenta():
         nombre = request.form.get('name')
         email = request.form.get('email')

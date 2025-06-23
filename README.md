@@ -1,17 +1,22 @@
-# Proyecto de una API (programacion avanzada)
+# PopcornHour 🎬🍿
 
-Este es un proyecto donde estaremos realizando una API con python y algunos componentes de HTML.
+**PopcornHour** es una aplicación web donde los usuarios pueden recomendar, calificar y comentar sobre películas y series. El sistema está inspirado en plataformas como IMDB y Rotten Tomatoes, y cuenta con dos tipos de usuarios:
 
-#### Lenguajes utilizados
+- **Moderador**: puede subir películas, editar o eliminar entradas.
+- **Usuario estándar**: puede comentar, calificar y explorar el catálogo.
 
-- Python 
-- HTML
-- Markdown
-- CSS
+## 🛠 Tecnologías utilizadas
+
+- Python
+- Flask
+- HTML + CSS + Bootstrap
+- PostgreSQL (con SQLAlchemy)
+- JWT para autenticación
 - JavaScript
 
-Para ejecutar este repositorio tenemos que ejecutar todas las librerias que se encuentran en el archivo **requirments**.
+## 🚀 Instalación
 
-Para instalar estas librerias necesitamos instalar el siguiente codigo en la consola. `pip install -r requirments.txt` o en su defecto `pip3 install -r requirments.txt`
+1. Clona el repositorio:
+```bash
+git clone https://github.com/Laugalin/api_programacion_avanzada.git
 
-Posterior a eso ya podemos ejecutar el codigo con el comando `python app.py`.

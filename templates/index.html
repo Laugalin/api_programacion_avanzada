@@ -1,53 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Inicio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Página de Inicio - PopcornHour</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center;
             background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: flex-start;
         }
 
         header {
+            width: 100%;
             background-color: #6200ea;
             color: white;
-            padding: 20px;
-            font-size: 24px;
+            padding: 30px 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 15px rgba(98,0,234,0.4);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
         }
 
-        .content {
-            padding: 20px;
+        main {
+            flex: 1;
+            max-width: 800px;
+            width: 90%;
+            margin-top: 60px;
+            text-align: center;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        main h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #6200ea;
+            text-shadow: 0 2px 4px rgba(98,0,234,0.4);
+        }
+
+        main p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .nav-links a {
+            padding: 15px 40px;
+            background-color: #6200ea;
+            color: white;
+            text-decoration: none;
+            border-radius: 35px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 15px rgba(98,0,234,0.35);
+            transition: all 0.3s ease;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background-color: #4500b5;
+            box-shadow: 0 8px 25px rgba(69,0,181,0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Opcional: efecto sutil en el body para hacerlo más vivo */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(98,0,234,0.1), transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 1.8rem;
+                padding: 20px 0;
+            }
+            main h1 {
+                font-size: 2rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links a {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        Bienvenido a mi página de inicio
+        Bienvenido a PopcornHour 🍿🎬
     </header>
-    <div class="content">
-        <h1>¡Hola!</h1>
-        <p>Esta es una página de inicio con una imagen de Internet.</p>
-        <!--La letra a es un hipervinculo-->
-        {% if logged %}
-        <a href="user_info">Perfil</a>
-        
-        {% else %}
-        <a href="signup">Crear cuenta</a>
-        <a href="login">Iniciar sesión</a>
 
-        {% endif %}
-    </div>
+    <main>
+        <h1>Explora, califica y comenta tus películas favoritas</h1>
+        <p>Únete a la comunidad cinéfila. Inicia sesión o regístrate para participar.</p>
+
+        <div class="nav-links">
+            {% if logged %}
+                <a href="user_info">Perfil</a>
+            {% else %}
+                <a href="signup">Crear cuenta</a>
+                <a href="login">Iniciar sesión</a>
+            {% endif %}
+        </div>
+    </main>
 </body>
 </html>
+
