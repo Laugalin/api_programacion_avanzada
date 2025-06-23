@@ -60,7 +60,17 @@ def iniciar_sesion(correo, password):
 
         
         print('Inicio de sesión exitoso :D')
-        token_de_acceso = create_access_token(identity=usuarios_existentes.name, expires_delta=caducidad)
+        token_de_acceso = create_access_token(
+            identity=usuarios_existentes.name, 
+            expires_delta=caducidad,
+            # Con esto agregamos al payload la llave 'user_id' donde venga el id de la tabla
+            additional_claims={'user_id': usuarios_existentes.id}
+        )
+        
+        
+        
+        
+        
         print(token_de_acceso)
         return {'status' : 'ok', 'token' : token_de_acceso}
     
@@ -79,3 +89,11 @@ def encontrar_todos_los_usuarios():
     print(usuarios)
 
     return usuarios
+# Tenemos que creear una función de buscar un usuario por su ID
+def encontrar_usuario_por_id(user_id):
+
+    usuario = Usuario.query.filter_by(id=user_id).first()
+
+    if usuario == None:
+        return{'status':'Error', 'Error':'El usuario no existe en la db'}
+    return usuario

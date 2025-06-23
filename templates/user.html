@@ -3,7 +3,21 @@
         <title>Inicio usuario</title>
     </head>
     <body>
-        <h1>Hola {{ nombre }}</h1>
+
+        <p>Nombre: {{ user_data[1] }}</p>
+        <p>ID: {{ user_data[0] }}</p>
+        <p>Correo: {{ user_data[2] }}</p>
+
+
+
+        <!----
+        {% for dato in user_data %}
+
+        <p>{{ dato }}</p>
+
+        {% endfor %}
+        -->
+        <a href="logout">Cerrar sesión</a>
     </body>
 
 </html>

@@ -2,11 +2,11 @@
 
 from flask import Flask, render_template, request, redirect, url_for, make_response
 
-from methods import crear_cuenta, iniciar_sesion, encontrar_todos_los_usuarios
+from methods import crear_cuenta, iniciar_sesion, encontrar_usuario_por_id
 
-from extensions import jwt
+from flask_jwt_extended import decode_token, verify_jwt_in_request, get_jwt_identity
 
-from flask_jwt_extended import decode_token
+
 
 firma = '0Bjk5fTiU6VtsbLILf9HFX6UMc2R5b'
 
@@ -17,8 +17,22 @@ def cargar_rutas(app):
     def index():
         # Buscamos todos los dato de la tabla "usuarios"
 
+        logged = False
+        try:
+            
+        # La aplicación va a revisar si existe la cookie de acceso
+            verify_jwt_in_request()
+            logged = True
+  
+        except Exception as error:
+            logged = False
+            print(error)
 
-        return render_template('index.html')
+
+
+
+
+        return render_template('index.html', logged=logged)
 
 
     #Esta es otra ruta
@@ -100,25 +114,62 @@ def cargar_rutas(app):
 
     @app.route('/usuario')
     def pantalla_usuario():
-        token = request.cookies.get('access_token')
+        try:
+            # La aplicación va a revisar si existe la cookie de acceso
+            verify_jwt_in_request()
 
-# Si existe un token intentamos decodificar la información
-        if token:
+            nombre_de_usuario = get_jwt_identity()
 
-            try:
+            id_del_usuario = request.args.get('user_id')
 
-                informacion_token = decode_token(token)
+            datos_usuario = encontrar_usuario_por_id(id_del_usuario)
 
-                print(informacion_token)
-                # Lo redireccionamos a la pagina del usuario
-                return render_template('user.html', nombre=informacion_token['sub'])
-            # Si el token viene dañado o es incorrecto
-            except:
-                # Redigiremos al usuario al login
-                print('El token viene incorrecto')
-                return redirect(url_for('login'))
+            datos_usuario =[datos_usuario.id, datos_usuario.name, datos_usuario.email]
 
-        else:
+            print(datos_usuario)
+
+            #print(f'El ID que viene en los argumentos es : {id_del_usuario}')
+
+
+            return render_template('user.html', user_data=datos_usuario)
+
+        except Exception as error:
+            print('La cookie no existe o esta mal')
+            print(f'La razón es : {error}')
+
             return redirect(url_for('login'))
+
+    @app.route('/logout')
+    def cerrar_sesion():
+        respuesta = make_response(redirect(url_for('index')))
+        respuesta.set_cookie('access_token', '')
+
+        return respuesta
+    
+    @app.route('/user_info')
+    def obtener_info_usuario():
+        try:
+            verify_jwt_in_request()
+            # Obtenemos el token del usuario a traves de la cookie
+            user_token = request.cookies.get('access_token')
+
+            token_info = decode_token(user_token)
+
+            id_usuario = token_info['user_id']
+            print(id_usuario)
+
+            return redirect(url_for('pantalla_usuario', user_id=id_usuario))
+
+        except Exception as error:
+            print(error)
+            return redirect(url_for('index'))
+
+        #datos_usuario = encontrar_usuario_por_id()
+
+        
+
+    
+
+
 
                                                                        

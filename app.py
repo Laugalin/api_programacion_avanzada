@@ -26,6 +26,18 @@ app.config['SQLACHEMY_TRACK_MODIFICATIONS'] = False
 # 0Bjk5fTiU6VtsbLILf9HFX6UMc2R5b
 app.config['JWT_SECRET_KEY'] = '0Bjk5fTiU6VtsbLILf9HFX6UMc2R5b'
 
+
+# Agregamos tres configuraciones para que nuestra app pueda manejar la cookie
+
+# Le decimos a la app que eltoken de acceso estara en las cookies
+
+app.config['JWT_TOKEN_LOCATION'] = ['cookies']
+
+app.config['JWT_ACCESS_COOKIE_NAME'] = 'access_token'
+
+# Es que no va a utilizar la proteccion contra ataques CSRF
+app.config['JWT_COOKE_CSRF_PROTECTION'] = False
+
 db.init_app(app)
 
 
