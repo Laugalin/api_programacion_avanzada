@@ -17,6 +17,15 @@
 ## 🚀 Instalación
 
 1. Clona el repositorio:
-```bash
+
 git clone https://github.com/Laugalin/api_programacion_avanzada.git
 
+2. Instala las dependencias:
+
+pip install -r requirements.txt
+
+3. Ejecuta el proyecto:
+
+python app.py
+
+4. El servidor quedará disponible en: http://localhost:8080
