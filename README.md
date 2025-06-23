@@ -1,9 +1,6 @@
 # PopcornHour 🎬🍿
 
-**PopcornHour** es una aplicación web donde los usuarios pueden recomendar, calificar y comentar sobre películas y series. El sistema está inspirado en plataformas como IMDB y Rotten Tomatoes, y cuenta con dos tipos de usuarios:
-
-- **Moderador**: puede subir películas, editar o eliminar entradas.
-- **Usuario estándar**: puede comentar, calificar y explorar el catálogo.
+**PopcornHour** es una aplicación web donde los usuarios pueden recomendar, calificar y comentar sobre películas y series. 
 
 ## 🛠 Tecnologías utilizadas
 
